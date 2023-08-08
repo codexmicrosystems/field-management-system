@@ -9,7 +9,9 @@ mod network;
 fn main() {
     let mut switch = Switch::new("192.168.1.197", "admin", "Testing123!");
 
-    let send = switch.send_command("show network");
+    loop {
+        let send = switch.send_command("show network");
 
-    println!("{:?}", send);
+        println!("{:?}", send);
+    }
 }
