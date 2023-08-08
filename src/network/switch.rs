@@ -8,12 +8,12 @@ use std::net::TcpStream;
 
 const SSH_PORT: &str = "22";
 
-const RED_1_VLAN: u8 = 10;
-const RED_2_VLAN: u8 = 20;
-const RED_3_VLAN: u8 = 30;
-const BLUE_1_VLAN: u8 = 40;
-const BLUE_2_VLAN: u8 = 50;
-const BLUE_3_VLAN: u8 = 60;
+// const RED_1_VLAN: u8 = 10;
+// const RED_2_VLAN: u8 = 20;
+// const RED_3_VLAN: u8 = 30;
+// const BLUE_1_VLAN: u8 = 40;
+// const BLUE_2_VLAN: u8 = 50;
+// const BLUE_3_VLAN: u8 = 60;
 
 pub struct Switch {
     ip_address: &'static str,
@@ -35,21 +35,21 @@ impl Switch {
         };
     }
 
-    fn config_team_ethernet() {}
+    // fn config_team_ethernet() {}
 
-    /// Returns a map of currently-configured team IDs to VLANs.
-    fn get_team_vlans(&mut self) {
-        // Get the entire config dump.
-        let mut config = self.send_command("show network\n");
+    // /// Returns a map of currently-configured team IDs to VLANs.
+    // fn get_team_vlans(&mut self) {
+    //     // Get the entire config dump.
+    //     let mut config = self.send_command("show network\n");
 
-        // Parse out the team IDs and VLANs from the config dump
+    //     // Parse out the team IDs and VLANs from the config dump
 
-        // Build the map of the team IDs to VLANs.
-    }
+    //     // Build the map of the team IDs to VLANs.
+    // }
 
     /// Logs into the switch via SSH and runs the given command in user exec mode.
     /// Reads the output and returns it as a string.
-    fn send_command(&mut self, command: &str) -> String {
+    pub fn send_command(&mut self, command: &str) -> String {
         // Open a SSH connection to the switch.
         let tcp = TcpStream::connect(self.ip_address.to_owned() + ":" + SSH_PORT).unwrap();
         let mut session = Session::new().unwrap();
@@ -69,12 +69,12 @@ impl Switch {
         return response;
     }
 
-    /// Logs into the switch via SSH and runs the given command in global
-    /// config mode. Reads the output and returns it as a string.
-    fn send_config_command(&mut self, command: &str) -> String {
-        return self.send_command(
-            &("config terminal\n%send\ncopy running-config startup-config\n\n".to_owned()
-                + command),
-        );
-    }
+    // /// Logs into the switch via SSH and runs the given command in global
+    // /// config mode. Reads the output and returns it as a string.
+    // fn send_config_command(&mut self, command: &str) -> String {
+    //     return self.send_command(
+    //         &("config terminal\n%send\ncopy running-config startup-config\n\n".to_owned()
+    //             + command),
+    //     );
+    // }
 }

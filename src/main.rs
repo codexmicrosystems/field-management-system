@@ -2,12 +2,14 @@
 // work is licensed under the terms of the MIT license which can be
 // found in the root directory of this project.
 
-use field::field::Field;
+use crate::network::switch::Switch;
 
-mod field;
 mod network;
-mod plc;
 
 fn main() {
-    let field = Field::new();
+    let mut switch = Switch::new("192.168.1.197", "admin", "Testing123!");
+
+    let send = switch.send_command("show network");
+
+    println!("{:?}", send);
 }
